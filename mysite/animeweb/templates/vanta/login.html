@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+  {% load static from staticfiles %}
+
+<html>
+<head>
+
+     <link rel ="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+
+
+</head>
+{%block content %}
+  <h1> Welcome to VantaSpring </h1>
+    <h2>Login</h2>
+      {%csrf_token%}
+      {{form.as_p}}
+      <button type= "submit">Login</button>
+
+    </form>
+{% endblock %}
+</html>
