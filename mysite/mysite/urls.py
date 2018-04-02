@@ -17,9 +17,14 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.urls import path
 from django.conf import settings
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns;
+from . import views
 urlpatterns = [
+    url(r'^$',views.Home.as_view(),name='home'), # for the homepage
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/',include("accounts.urls",namespace = "accounts")),
+    url(r'^accounts/',include("django.contrib.auth.urls")),
     url(r'^vantaspring/',include('animeweb.urls')),
+
 ]
 urlpatterns+= staticfiles_urlpatterns()
