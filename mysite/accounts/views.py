@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import login,logout
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from . import forms
 
 # Create your views here.
 
@@ -16,6 +17,6 @@ class LogoutView(generic.RedirectView):
 
 ## signup view for the viewer to sign up
 class SignUp(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = forms.UserCreationForm
     success_url = reverse_lazy("login")
     template_name = "accounts/signup.html"
