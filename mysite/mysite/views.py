@@ -1,7 +1,10 @@
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
 
-class Home(TemplateView):
-    template_name = "home.html" ## can replace as index
+def login_redirect(request):
+    return redirect('accounts/login')
+
+ ## can replace as index
