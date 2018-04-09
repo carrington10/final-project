@@ -21,8 +21,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns;
 from . import views
 from mysite import views
 urlpatterns = [
-    url(r'^$',views.login_redirect, name ='login_redirect'),
     #url(r'^',views.Home.as_view(),name='home'), # for the homepage
+    url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/',include("accounts.urls",namespace = "accounts")),
     url(r'^accounts/',include("django.contrib.auth.urls")),

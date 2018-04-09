@@ -72,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% load bootstrap3 %}
+
+{% block body %}
+
+  <title> Profile</title>
+<div class ="containter">
+  <h1> Profile</h1>
+      <p>user {{user}}</p>
+      <p>First Name:{{user.first_name}}</p>
+      <p>Last Name:{{user.last_name}}</p>
+      <p>Email: {{user.email}}</p>
+</div>
+{% endblock %}

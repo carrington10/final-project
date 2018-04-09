@@ -1,11 +1,17 @@
+{% extends "base.html" %}
+
 {% load static from staticfiles %}
-<!DOCTYPE html>
 
-<HTML>
-  <head>
-     <link rel ="stylesheet" href="{% static 'static_serve/css/base.css' %}" type="text/css">
+<html>
+
+
+{% block head %}
 <h1>Welcome to VantaSpring</h1>
-</head>
+{% endblock %}
+    {% block body %}
+          <h1> Where anime goers create, spring, and live</h1>
+    {% endblock %}
 
 
-</HTML>
+
+</html>
