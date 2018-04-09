@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
                         UserCreationForm,
                         UserChangeForm,
                      PasswordChangeForm)
 from django.contrib.auth.models import  User
 from accounts.forms import SignupForm, EditProfileForm
+
 
 # Create your views here.
 
@@ -27,10 +29,11 @@ def register(request):
             args = {'form':form}
             return render(request,'accounts/signup.html',args)
 # profile view for the user and friends of user to see thier profile
+@login_required
 def view_profile(request):
     args = {'user': request.user}
     return render(request,'accounts/profile.html',args)
-
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST,instance = request.user)
@@ -48,7 +51,7 @@ def edit_profile(request):
             return render(request,'accounts/edit_profile.html',args)
 
 # lets the user change thier password
-
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data = request.POST, user = request.user)
