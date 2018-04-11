@@ -20,6 +20,7 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns;
 from . import views
 from mysite import views
+from django.conf.urls.static import static
 urlpatterns = [
     #url(r'^',views.Home.as_view(),name='home'), # for the homepage
     url(r'^$', views.login_redirect, name='login_redirect'),
@@ -28,5 +29,5 @@ urlpatterns = [
     url(r'^accounts/',include("django.contrib.auth.urls")),
     url(r'^vantaspring/',include('animeweb.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+= staticfiles_urlpatterns()

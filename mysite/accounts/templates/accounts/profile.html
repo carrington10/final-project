@@ -9,9 +9,13 @@
   <title> Profile</title>
 <div class ="containter">
   <h1> Profile</h1>
+      <p> <img src="{{ user.userprofile.image.url }}" width="240"> </p>
       <p>user {{user}}</p>
       <p>First Name:{{user.first_name}}</p>
       <p>Last Name:{{user.last_name}}</p>
-      <p>Email: {{user.email}}</p>
+      <p>City: {{ user.userprofile.email}}</p>
+      <p>Email: {{user.userprofile.email}}</p>
+      <p>Favorite Anime:  {{user.userprofile.favanime}}</p>
+      <p>Bio: {{user.userprofile.bio}}<p>
 </div>
 {% endblock %}

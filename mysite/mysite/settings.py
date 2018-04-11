@@ -125,6 +125,10 @@ USE_TZ = True
 
 ## static files dirctory for serving page css javascript backgrounds
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'mysite/media')
+
+
 
 
 STATICFILES_DIRS = (
