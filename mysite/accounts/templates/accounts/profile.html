@@ -9,7 +9,9 @@
   <title> Profile</title>
 <div class ="containter">
   <h1> Profile</h1>
+  {% if user.userprofile.image %}
       <p> <img src="{{ user.userprofile.image.url }}" width="240"> </p>
+  {% endif %}
       <p>user {{user}}</p>
       <p>First Name:{{user.first_name}}</p>
       <p>Last Name:{{user.last_name}}</p>

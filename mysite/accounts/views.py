@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
                         UserCreationForm,
@@ -29,9 +29,15 @@ def register(request):
             args = {'form':form}
             return render(request,'accounts/signup.html',args)
 # profile view for the user and friends of user to see thier profile
+
+
 @login_required
-def view_profile(request):
-    args = {'user': request.user}
+def view_profile(request,pk=None):
+    if pk:
+        user = User.objects.get(pk=pk)
+    else:
+        user = request.user
+    args = {'user': user}
     return render(request,'accounts/profile.html',args)
 @login_required
 def edit_profile(request):

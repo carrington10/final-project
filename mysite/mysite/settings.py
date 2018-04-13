@@ -72,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
