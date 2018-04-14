@@ -13,6 +13,8 @@ from accounts.forms import SignupForm, EditProfileForm
 # Create your views here.
 
 ## sign up view for the user to sign up
+
+
 def register(request):
     if request.method =='POST':
             form  = SignupForm(request.POST)
@@ -45,7 +47,7 @@ def edit_profile(request):
         form = EditProfileForm(request.POST,instance = request.user)
         if form.is_valid():
                         form.save()
-                        return redirect('accounts/profile')
+                        return redirect(reverse('accounts:view_profile'))
         else:
                 form = EditProfileForm(instance = request.user)
                 args = {'form': form}
