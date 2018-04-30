@@ -3,10 +3,22 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Post(models.Model):
-    post = models.CharField(max_length=100)
     user = models.ForeignKey(User,on_delete = models.CASCADE)
+    post = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey('Post', related_name='comments',on_delete = models.CASCADE)
+    creator = models.CharField(max_length=200,default="")
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
+
+
 class Friend(models.Model):
     users = models.ManyToManyField(User)
     current_user = models.ForeignKey(User,related_name='owner',null = True,on_delete = models.CASCADE)

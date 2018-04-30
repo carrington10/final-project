@@ -7,7 +7,7 @@
 {% block body %}
 
   <title> Profile</title>
-<div class ="containter">
+<div class ="container">
   <h1> Profile</h1>
   {% if user.userprofile.image %}
       <p> <img src="{{ user.userprofile.image.url }}" width="240"> </p>
@@ -16,7 +16,7 @@
       <p>First Name:{{user.first_name}}</p>
       <p>Last Name:{{user.last_name}}</p>
       <p>City: {{ user.userprofile.email}}</p>
-      <p>Email: {{user.userprofile.email}}</p>
+      <p>Email: {{user.userprofile.city}}</p>
       <p>Favorite Anime:  {{user.userprofile.favanime}}</p>
       <p>Bio: {{user.userprofile.bio}}<p>
 </div>

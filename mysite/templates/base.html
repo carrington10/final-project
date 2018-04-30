@@ -31,6 +31,8 @@
                <li> <a href="{% url 'accounts:view_profile' %}"> Profile </a></li>
                 <li> <a href="{% url 'accounts:edit_profile' %}"> Edit Account </a></li>
                 <li> <a href="{% url 'accounts:change_password' %}">Password Change</a></li>
+                <li> <a href="{% url 'message:messages_inbox' %}"> Inbox</a></li>
+                <li> <a href="{% url 'message:messages_compose' %}"> Compose</a></li>
              </ul>
              <ul class="nav navbar-nav navbar-right">
                <li><a href = "{% url 'logout' %}">Logout</a></li>

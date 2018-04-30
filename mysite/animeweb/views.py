@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import UserProfile
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import HomeForm
-from .models import Friend, Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import HomeForm, CommentForm
+from .models import Friend, Post, Comment
 
 # Create your views here.
 
@@ -34,6 +36,31 @@ class HomeView(TemplateView):
         args = {'form':form,'text':text}
         return render(request, self.template_name, args)
 
+
+
+class PostView(TemplateView):
+      template_name = 'vanta/video_detail.html'
+      def get(self,request,pk):
+          post = Post.objects.get(pk=pk)
+          args = {'post': post}
+          return render(request, self.template_name,args)
+
+class CommentView(LoginRequiredMixin,CreateView):
+      template_name = 'vanta/add_comment.html'
+      model = Comment
+      form_class = CommentForm
+      def post(self,request,pk):
+                 post = get_object_or_404(Post, pk=pk)
+                 if request.method == "POST":
+                        form = CommentForm(request.POST)
+                        if form.is_valid():
+                            comment = form.save(commit=False)
+                            comment.post = post
+                            comment.save()
+                            return redirect('animeweb:post_view', pk=post.pk)
+                 else:
+                            form = CommentForm()
+                            return render(request, self.template_name, {'form': form})
 
 
 

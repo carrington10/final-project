@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
+from accounts.models import UserProfile
+
 
 
 # defines a form for the user to signup
@@ -29,14 +31,14 @@ class SignupForm(UserCreationForm):
                 user.save()
             return user
 
-class EditProfileForm(UserChangeForm):
+class EditProfileForm(forms.ModelForm):
 
     class Meta:
-        model = User
+        model = UserProfile
         fields =(
+        'name',
         'email',
-        'first_name',
-        'last_name',
-        'password'
+        'city',
+        'bio',
+        'favanime',
         )
-        exclude = ()

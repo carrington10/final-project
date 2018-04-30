@@ -27,7 +27,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/',include("accounts.urls",namespace = "accounts")),
     url(r'^accounts/',include("django.contrib.auth.urls")),
+    url(r'^messages/', include('django_messages.urls', namespace = 'message')),
     url(r'^vantaspring/',include('animeweb.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+= staticfiles_urlpatterns()
