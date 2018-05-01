@@ -146,7 +146,7 @@ def delete(request, message_id, success_url=None):
     message = get_object_or_404(Message, id=message_id)
     deleted = False
     if success_url is None:
-        success_url = reverse('messages_inbox')
+        success_url = reverse('message:messages_inbox')
     if 'next' in request.GET:
         success_url = request.GET['next']
     if message.sender == user:
