@@ -28,8 +28,9 @@ def inbox(request, template_name='django_messages/inbox.html'):
     """
     message_list = Message.objects.inbox_for(request.user)
     return render(request, template_name, {
-        'message:message_list': message_list,
+        'message_list': message_list,
     })
+
 
 @login_required
 def outbox(request, template_name='django_messages/outbox.html'):

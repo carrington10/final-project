@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'bootstrap3',
     'animeweb',
+    'star_ratings',
 ]
 SITE_ID = 1
 MIDDLEWARE = [
