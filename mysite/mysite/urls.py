@@ -29,7 +29,6 @@ urlpatterns = [
     url(r'^accounts/',include("django.contrib.auth.urls")),
     url(r'^messages/', include('django_messages.urls', namespace = 'message')),
     url(r'^vantaspring/',include('animeweb.urls')),
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
