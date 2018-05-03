@@ -11,7 +11,7 @@ class UserProfile(models.Model):
        city = models.CharField(max_length=20,default='');
        bio  = models.TextField(default='');
        favanime = models.CharField(max_length=30,default='');
-       image = models.ImageField(upload_to='profile_image',blank=True)
+       image = models.ImageField(upload_to='profile_image',blank=True,default='profile_image/default.jpg')
        def __str__(self):
            return self.user.username
 # saves the user profile informations when creating a user profile

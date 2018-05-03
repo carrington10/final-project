@@ -10,7 +10,9 @@
 <div class ="container">
   <h1> Profile</h1>
   {% if user.userprofile.image %}
-      <p> <img src="{{ user.userprofile.image.url }}" width="240"> </p>
+      <p> <img src="{{ user.userprofile.image.url }}" width="240" height="150" ></p>
+   {% else %}
+     <p> <img src="{% static 'images/default.jpg' %}"  width="240" height="150"> </p>
   {% endif %}
       <p>user {{user}}</p>
       <p>First Name:{{user.first_name}}</p>

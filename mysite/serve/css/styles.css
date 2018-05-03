@@ -1,0 +1,30 @@
+.navbar-default {
+
+  background-color: #584b4f;
+   border-color:#584b4f;
+  color: #efeae1;
+  font-size: 20px;
+font-family: 'Jura', sans-serif;
+}
+
+nav .nav-brand > a { color: #ffd152 }
+
+.nav>li>a:hover,
+.nav>li>a:focus {
+  background-color: #ffd152 !important; //or whatever you want
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white; /*Change active text color here*/
+}
+
+img {
+    border-radius: 50%;
+}
+
+
+body{
+
+font-family: 'Jura', sans-serif;
+
+}
