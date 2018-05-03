@@ -8,6 +8,7 @@ from django.contrib.auth.forms import (
                      PasswordChangeForm)
 from django.contrib.auth.models import  User
 from accounts.forms import SignupForm, EditProfileForm
+from animeweb.models import Friend
 
 
 # Create your views here.
@@ -37,9 +38,13 @@ def register(request):
 def view_profile(request,pk=None):
     if pk:
         user = User.objects.get(pk=pk)
+        friend = Friend.objects.get(current_user=request.user)
+        friends = friend.users.all()
     else:
         user = request.user
-    args = {'user': user}
+        friend = Friend.objects.get(current_user=request.user)
+        friends = friend.users.all()
+    args = {'user': user,'friends':friends}
     return render(request,'accounts/profile.html',args)
 @login_required
 def edit_profile(request):

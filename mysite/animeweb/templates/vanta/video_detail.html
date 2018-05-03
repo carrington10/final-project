@@ -11,9 +11,9 @@
 <h1>{{ post.post }}</h1>
      <p>{{ post.user.get_full_name|linebreaksbr }}</p>
 
-     
 
-    <a class="btn btn-default" href="{% url 'animeweb:add_comment' pk=post.pk %}">Add comment</a>
+
+    <a class="btn btn-default" href="{% url 'animeweb:add_comment' pk=post.pk %}">Comment</a>
      {% for comment in post.comments.all %}
          <div class="comment">
              <div class="date">{{ comment.created_date }}</div>
