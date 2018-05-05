@@ -77,14 +77,7 @@ background-color:#393e44;
 border-color: #337ab7;}
 
 
-.column {
-    float: left;
-}
-
-.left, .right {
-    width: 25%;
-}
-
-.middle {
-    width: 50%;
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+color:black;
+background-color:black;
 }

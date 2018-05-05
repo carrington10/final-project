@@ -4,10 +4,15 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
-    post = models.CharField(max_length=100)
+    title = models.CharField(max_length=50,default="")
+    description = models.TextField(max_length=300,default="")
+    video=models.FileField(upload_to='media/videos/',null=True,verbose_name="")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+
+    def __str__(self):
+        return self.title + ": " + str(self.video)
 
 class Comment(models.Model):
     post = models.ForeignKey('Post', related_name='comments',on_delete = models.CASCADE)

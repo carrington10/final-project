@@ -52,9 +52,13 @@
                   <div class="panel-body">
                     {% for friend in friends %}
                       <div class ="friends-decor">
-
-                        <a href="{% url 'accounts:view_profilepk' pk=friend.pk %}">{{ friend.username }}</a>
+                        <div class="list-group">
+                            <a href="{% url 'accounts:view_profilepk' pk=friend.pk %}" class="list-group-item list-group-item-action active">{{ friend.username }}</a>
+                        </div>
                       </div>
+
+                      {% empty %}
+                          <p>None</p>
                     {% endfor %}
                   </div>
               </div>

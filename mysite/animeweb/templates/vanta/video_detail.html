@@ -4,11 +4,12 @@
 
 {% block body %}
 <head>
-
-<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 </head>
-<h1>{{ post.post }}</h1>
+<h1>{{ post.title }}</h1>
+<video width='400' controls>
+<source src='{{MEDIA_URL}}{{ post.video }}'>
+</video>
+{{post.description}}
      <p>{{ post.user.get_full_name|linebreaksbr }}</p>
 
 

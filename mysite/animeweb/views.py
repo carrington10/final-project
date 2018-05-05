@@ -42,6 +42,7 @@ class PostView(TemplateView):
       template_name = 'vanta/video_detail.html'
       def get(self,request,pk):
           post = Post.objects.get(pk=pk)
+          videofile= post.video
           args = {'post': post}
           return render(request, self.template_name,args)
 
@@ -69,6 +70,9 @@ def change_friends(request,operation,pk):
     friend = User.objects.get(pk=pk)
     if operation == 'add':
         Friend.make_friend(request.user,friend)
+        Friend.make_friend(friend,request.user)
     elif operation == 'remove':
         Friend.lose_friend(request.user,friend)
+        Friend.lose_friend(friend,request.user)
+
     return redirect('animeweb:home')

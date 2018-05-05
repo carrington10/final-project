@@ -38,8 +38,11 @@ def register(request):
 def view_profile(request,pk=None):
     if pk:
         user = User.objects.get(pk=pk)
-        friend = Friend.objects.get(current_user=request.user)
-        friends = friend.users.all()
+        try:
+                friend = Friend.objects.get(current_user=user)
+                friends = friend.users.all()
+        except Friend.DoesNotExist:
+                        friends = None;
     else:
         user = request.user
         friend = Friend.objects.get(current_user=request.user)
