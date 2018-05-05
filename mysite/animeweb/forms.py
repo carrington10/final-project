@@ -7,7 +7,7 @@ class HomeForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title','description','video')
+        fields = ('title','description','video','image',)
 
 class CommentForm(forms.ModelForm):
 

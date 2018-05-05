@@ -17,7 +17,7 @@
   </div>
   <div class="panel-body">
     {% if user.userprofile.image %}
-        <p> <img src="{{ user.userprofile.image.url }}" width="240" height="150" ></p>
+        <p> <img class="profile-img" src="{{ user.userprofile.image.url }}" width="240" height="150" ></p>
      {% else %}
        <p> <img src="{% static 'images/default.jpg' %}"  width="240" height="150"> </p>
     {% endif %}

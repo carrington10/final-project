@@ -41,4 +41,5 @@ class EditProfileForm(forms.ModelForm):
         'city',
         'bio',
         'favanime',
+        'image',
         )

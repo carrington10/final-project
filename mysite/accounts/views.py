@@ -37,12 +37,12 @@ def register(request):
 @login_required
 def view_profile(request,pk=None):
     if pk:
-        user = User.objects.get(pk=pk)
-        try:
-                friend = Friend.objects.get(current_user=user)
-                friends = friend.users.all()
-        except Friend.DoesNotExist:
-                        friends = None;
+            user = User.objects.get(pk=pk)
+            try:
+                    friend = Friend.objects.get(current_user=user)
+                    friends = friend.users.all()
+            except Friend.DoesNotExist:
+                            friends = None;
     else:
         user = request.user
         friend = Friend.objects.get(current_user=request.user)

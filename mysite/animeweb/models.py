@@ -6,7 +6,8 @@ class Post(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE)
     title = models.CharField(max_length=50,default="")
     description = models.TextField(max_length=300,default="")
-    video=models.FileField(upload_to='media/videos/',null=True,verbose_name="")
+    video=models.FileField(upload_to='videos',null=True,verbose_name="")
+    image = models.ImageField(upload_to='popimage',blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
