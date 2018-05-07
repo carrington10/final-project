@@ -41,7 +41,22 @@
     <div class="panel panel-default">
             <div class="panel-heading">About Me</div>
             <div class="panel-body"> {{user.userprofile.bio}}</div>
+            <br />
+
+
     </div>
+    <a class="btn btn-default" href="{% url 'accounts:add_wall' pk=user.pk %}">Post on wall</a>
+
+  <br />
+    {% for wallp in wallps %}
+        <div class="Wallpost">
+            <div class="date">{{ wallp.created_date |date }}</div>
+            <strong>{{ wallp.user.first_name }} {{ wallp.user.last_Name }}</strong>
+            <p>{{ wallp.wall|linebreaks }}</p>
+        </div>
+    {% empty %}
+        <p>No Wall Posts</p>
+    {% endfor %}
   </div>
   <div class="col-sm-3">
 

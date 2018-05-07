@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash,logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import (
                         UserCreationForm,
                         UserChangeForm,
                      PasswordChangeForm)
 from django.contrib.auth.models import  User
 from accounts.forms import SignupForm, EditProfileForm
-from animeweb.models import Friend
+from animeweb.models import Friend, Wallpost
+from animeweb.forms import WallForm
+from django.views.generic.edit import CreateView
 
 
 # Create your views here.
@@ -37,17 +40,27 @@ def register(request):
 @login_required
 def view_profile(request,pk=None):
     if pk:
+
             user = User.objects.get(pk=pk)
+
             try:
                     friend = Friend.objects.get(current_user=user)
                     friends = friend.users.all()
+
             except Friend.DoesNotExist:
                             friends = None;
+            try:
+                  wallp = Wallpost.objects.filter(to_user = user)
+            except Wallpost.DoesNotExist:
+                              wallp = None;
+
     else:
+
         user = request.user
+        wallp = Wallpost.objects.filter(to_user=request.user)
         friend = Friend.objects.get(current_user=request.user)
         friends = friend.users.all()
-    args = {'user': user,'friends':friends}
+    args = {'user': user,'friends':friends, 'wallps':wallp}
     return render(request,'accounts/profile.html',args)
 @login_required
 def edit_profile(request):
@@ -82,3 +95,38 @@ def change_password(request):
             form = PasswordChangeForm(user= request.user)
             args = {'form': form}
             return render(request,'accounts/change_password.html',args)
+
+
+## class wall posts
+class WallView(LoginRequiredMixin,CreateView):
+        def get(self, request, pk):
+            form = WallForm()
+            return render(request, 'accounts/add_wall.html', {'form':form})
+        def post(self, request, pk):
+            form = WallForm(request.POST)
+            if form.is_valid():
+                wall = form.cleaned_data.get("wall")
+                to_user = User.objects.get(pk=int(pk))
+                wall_post = Wallpost(wall=wall, to_user=to_user, user=request.user)
+                wall_post.save()
+                return redirect('accounts:view_profilepk',pk = to_user.pk)
+            return render(request, self.template_name, {'form': form})
+        '''
+        template_name = 'accounts/add_wall.html'
+        model = Wallpost
+        form_class = WallForm
+        field = ['wall']
+        def post(self,request,pk):
+                     form = WallForm(request.POST)
+                     if form.is_valid():
+                                form.save()
+                                user = User.objects.get(pk=int(pk))
+                                form.to_user = user
+                                #wall_post.to_user = user
+                                form.user =  request.user
+                                form.save()
+                                return redirect('accounts:view_profilepk',pk = Wallpost.to_user.pk)
+        def get(self,request,pk):
+            form = WallForm()
+            return render(request, self.template_name, {'form': form})
+        '''

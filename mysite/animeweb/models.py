@@ -25,6 +25,17 @@ class Comment(models.Model):
         return self.text
 
 
+class Wallpost(models.Model):
+
+                    user = models.ForeignKey(User,on_delete = models.CASCADE)
+                    to_user =  models.ForeignKey(User,related_name='to_user',on_delete = models.CASCADE)
+                    wall =  models.TextField(max_length=100,default="")
+                    day_created = models.DateTimeField(auto_now_add=True)
+
+
+
+                    def __str__(self):
+                            return self.wall
 class Friend(models.Model):
     users = models.ManyToManyField(User)
     current_user = models.ForeignKey(User,related_name='owner',null = True,on_delete = models.CASCADE)
