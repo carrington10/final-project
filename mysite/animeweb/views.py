@@ -11,7 +11,11 @@ from .models import Friend, Post, Comment
 # Create your views here.
 
 
-
+'''
+class view that displays the homepage of the user
+The get function returns a link to the videos , and current friends of the users
+The post functons lets the user create a new video, and post it on the slideshow 
+'''
 class HomeView(TemplateView):
     template_name = 'vanta/home.html'
     def get(self,request):
@@ -37,7 +41,9 @@ class HomeView(TemplateView):
         return render(request, self.template_name, args)
 
 
-
+'''
+Post view for displaying  the current video and getting thier Post objects related to the video clicked
+'''
 class PostView(TemplateView):
       template_name = 'vanta/video_detail.html'
       def get(self,request,pk):
@@ -46,6 +52,11 @@ class PostView(TemplateView):
           args = {'post': post}
           return render(request, self.template_name,args)
 
+
+'''
+This view class is for the user to create and post comments on the video they are currently on
+also displays
+ '''
 class CommentView(LoginRequiredMixin,CreateView):
       template_name = 'vanta/add_comment.html'
       model = Comment
@@ -64,7 +75,9 @@ class CommentView(LoginRequiredMixin,CreateView):
                             return render(request, self.template_name, {'form': form})
 
 
-
+'''
+function that lets the user add and remove friends
+'''
 @login_required
 def change_friends(request,operation,pk):
     friend = User.objects.get(pk=pk)

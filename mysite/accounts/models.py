@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.db.models.signals import post_save
 # Create your models here.
-
+'''
+Model class for users to sign up and create profiles 
+'''
 class UserProfile(models.Model):
        user =models.OneToOneField(User,on_delete=models.CASCADE,)
        name = models.CharField(max_length=30,default='');

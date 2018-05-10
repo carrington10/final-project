@@ -6,6 +6,9 @@ from accounts.models import UserProfile
 
 
 # defines a form for the user to signup
+'''
+class based form that registers users profile information
+'''
 class SignupForm(UserCreationForm):
     email =forms.EmailField(required = True)
 # define meta data that relates to class
@@ -30,7 +33,9 @@ class SignupForm(UserCreationForm):
             if commit:
                 user.save()
             return user
-
+'''
+class based form that lets users edit thier profile information
+'''
 class EditProfileForm(forms.ModelForm):
 
     class Meta:

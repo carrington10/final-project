@@ -21,6 +21,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns;
 from . import views
 from mysite import views
 from django.conf.urls.static import static
+'''
+Main url rounting file that routes to accounts, anime, and django messages form 
+'''
 urlpatterns = [
     #url(r'^',views.Home.as_view(),name='home'), # for the homepage
     url(r'^$', views.login_redirect, name='login_redirect'),

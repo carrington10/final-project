@@ -3,20 +3,18 @@
 {% load static from staticfiles %}
 
 {% block body %}
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-</head>
-<h1>{{ post.title }}</h1>
-<video width='400' controls>
-<source src='{{MEDIA_URL}}{{ post.video.url }}'>
-</video>
-{{post.description}}
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <h1>{{ post.title }}</h1>
+    <video width='400' controls>
+    <source src='{{MEDIA_URL}}{{ post.video.url }}'>
+    </video>
+        {{post.description}}
      <p>{{ post.user.get_full_name|linebreaksbr }}</p>
 
-
-
-    <a class="btn btn-default" href="{% url 'animeweb:add_comment' pk=post.pk %}">Comment</a>
+     <a class="btn btn-default" href="{% url 'animeweb:add_comment' pk=post.pk %}">Eskatiiiiiii!!!!!!</a>
      {% for comment in post.comments.all %}
          <div class="comment">
              <div class="date">{{ comment.created_date }}</div>

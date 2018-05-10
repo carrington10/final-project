@@ -3,7 +3,9 @@ from animeweb.views import HomeView, PostView, CommentView
 from . import views
 from django.contrib.auth.views import login
 
-
+'''
+Urls for routing users videos posts, and adding and removing friends 
+'''
 app_name="animeweb"
 urlpatterns =[
 url(r'^$',HomeView.as_view(), name = 'home'),
