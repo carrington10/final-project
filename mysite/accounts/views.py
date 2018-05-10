@@ -105,9 +105,13 @@ def change_password(request):
             return render(request,'accounts/change_password.html',args)
 
 
+<<<<<<< HEAD
 '''
 class based view that allows thr users to post on other users wall
 '''
+=======
+## class wall posts
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53
 class WallView(LoginRequiredMixin,CreateView):
         def get(self, request, pk):
             form = WallForm()
@@ -121,4 +125,26 @@ class WallView(LoginRequiredMixin,CreateView):
                 wall_post.save()
                 return redirect('accounts:view_profilepk',pk = to_user.pk)
             return render(request, self.template_name, {'form': form})
+<<<<<<< HEAD
     
+=======
+        '''
+        template_name = 'accounts/add_wall.html'
+        model = Wallpost
+        form_class = WallForm
+        field = ['wall']
+        def post(self,request,pk):
+                     form = WallForm(request.POST)
+                     if form.is_valid():
+                                form.save()
+                                user = User.objects.get(pk=int(pk))
+                                form.to_user = user
+                                #wall_post.to_user = user
+                                form.user =  request.user
+                                form.save()
+                                return redirect('accounts:view_profilepk',pk = Wallpost.to_user.pk)
+        def get(self,request,pk):
+            form = WallForm()
+            return render(request, self.template_name, {'form': form})
+        '''
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53

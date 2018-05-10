@@ -37,6 +37,11 @@
           <div class="panel-heading">About Me</div>
             <div class="panel-body"> {{user.userprofile.bio}}</div>
             <br />
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53
     </div>
     <a class="btn btn-default" href="{% url 'accounts:add_wall' pk=user.pk %}">Post on wall</a>
 
@@ -44,7 +49,11 @@
     {% for wallp in wallps %}
         <div class="Wallpost">
             <div class="date">{{ wallp.created_date |date }}</div>
+<<<<<<< HEAD
               <strong>{{ wallp.user.first_name }} {{ wallp.user.last_Name }}</strong>
+=======
+            <strong>{{ wallp.user.first_name }} {{ wallp.user.last_Name }}</strong>
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53
             <p>{{ wallp.wall|linebreaks }}</p>
         </div>
     {% empty %}

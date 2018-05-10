@@ -3,9 +3,12 @@ from . import views
 from django.contrib.auth.views import login ,logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from accounts.views import WallView
 
+<<<<<<< HEAD
 '''
 urls that links to varous methods that involves handling and creating users accounts 
 '''
+=======
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53
 app_name = 'accounts';
 urlpatterns = [
 # url(r"login/$", views.Loginview.as_view(),name="login")

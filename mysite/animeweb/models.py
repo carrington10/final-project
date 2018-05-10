@@ -45,9 +45,23 @@ class Wallpost(models.Model):
                     def __str__(self):
                             return self.wall
 
+<<<<<<< HEAD
 '''
 Model for adding, and removing friends 
 '''
+=======
+class Wallpost(models.Model):
+
+                    user = models.ForeignKey(User,on_delete = models.CASCADE)
+                    to_user =  models.ForeignKey(User,related_name='to_user',on_delete = models.CASCADE)
+                    wall =  models.TextField(max_length=100,default="")
+                    day_created = models.DateTimeField(auto_now_add=True)
+
+
+
+                    def __str__(self):
+                            return self.wall
+>>>>>>> 3d33c111dd033beb7c5a0a2a52f6c96134471b53
 class Friend(models.Model):
     users = models.ManyToManyField(User)
     current_user = models.ForeignKey(User,related_name='owner',null = True,on_delete = models.CASCADE)
