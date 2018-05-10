@@ -21,13 +21,18 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns;
 from . import views
 from mysite import views
 from django.conf.urls.static import static
+'''
+Main url rounting file that routes to accounts, anime, and django messages form 
+'''
 urlpatterns = [
     #url(r'^',views.Home.as_view(),name='home'), # for the homepage
     url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/',include("accounts.urls",namespace = "accounts")),
     url(r'^accounts/',include("django.contrib.auth.urls")),
+    url(r'^messages/', include('django_messages.urls', namespace = 'message')),
     url(r'^vantaspring/',include('animeweb.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns+= staticfiles_urlpatterns()

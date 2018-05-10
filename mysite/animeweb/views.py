@@ -1,15 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import UserProfile
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import HomeForm
-from .models import Friend, Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import HomeForm, CommentForm
+from .models import Friend, Post, Comment
 
 # Create your views here.
 
 
-
+'''
+class view that displays the homepage of the user
+The get function returns a link to the videos , and current friends of the users
+The post functons lets the user create a new video, and post it on the slideshow 
+'''
 class HomeView(TemplateView):
     template_name = 'vanta/home.html'
     def get(self,request):
@@ -35,13 +41,51 @@ class HomeView(TemplateView):
         return render(request, self.template_name, args)
 
 
+'''
+Post view for displaying  the current video and getting thier Post objects related to the video clicked
+'''
+class PostView(TemplateView):
+      template_name = 'vanta/video_detail.html'
+      def get(self,request,pk):
+          post = Post.objects.get(pk=pk)
+          videofile= post.video
+          args = {'post': post}
+          return render(request, self.template_name,args)
 
 
+'''
+This view class is for the user to create and post comments on the video they are currently on
+also displays
+ '''
+class CommentView(LoginRequiredMixin,CreateView):
+      template_name = 'vanta/add_comment.html'
+      model = Comment
+      form_class = CommentForm
+      def post(self,request,pk):
+                 post = get_object_or_404(Post, pk=pk)
+                 if request.method == "POST":
+                        form = CommentForm(request.POST)
+                        if form.is_valid():
+                            comment = form.save(commit=False)
+                            comment.post = post
+                            comment.save()
+                            return redirect('animeweb:post_view', pk=post.pk)
+                 else:
+                            form = CommentForm()
+                            return render(request, self.template_name, {'form': form})
+
+
+'''
+function that lets the user add and remove friends
+'''
 @login_required
 def change_friends(request,operation,pk):
     friend = User.objects.get(pk=pk)
     if operation == 'add':
         Friend.make_friend(request.user,friend)
+        Friend.make_friend(friend,request.user)
     elif operation == 'remove':
         Friend.lose_friend(request.user,friend)
+        Friend.lose_friend(friend,request.user)
+
     return redirect('animeweb:home')

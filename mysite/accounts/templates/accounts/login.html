@@ -8,13 +8,24 @@
 
 
 {% block body %}
+
 <div class="container">
     <h1>Welcome</h1>
-    <p>You can login here </p>
+  <div class="login">
+    Login
+  </div>
     <form method="POST">
       {% csrf_token %}
       {% bootstrap_form form %}
     <input type="submit" value="login" class="btn btn-default" />
     </form>
 </div>
+<!-- The video -->
+    <div class="fullscreen-bg">
+        <video autoplay muted loop id="myVideo">
+          <source src="{% static '/bvideo/boruto.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+
+
 {% endblock %}

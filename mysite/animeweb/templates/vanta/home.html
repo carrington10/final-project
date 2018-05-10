@@ -2,23 +2,49 @@
 
 {% load static from staticfiles %}
 
+<html>
+
+  <head>
+
+  </head>
 {% block body %}
 <div class="container">
     <div class="col-md-8">
         <h2>Home</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.post }}
-            <br>
-            <button type="submit">Submit</button>
-        </form>
+
         <h2>{{ text }}</h2>
-        {% for post in posts %}
-            <h1>{{ post.post }}</h1>
-            <p>Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
+        <div class="w3-content w3-section" style="max-width:500px">
+              {% for post in posts %}
+              <div class ="mySlides w3-animate-fading">
+
+                <img src="{{post.image.url}}" style="width:100%">
+                <div class="w3-display-center w3-container w3-padding-16 w3-black">
+                  <a href="{% url 'animeweb:post_view' pk=post.pk %}">{{ post.title }} </a>
+                </div>
+              </div>
         {% endfor %}
+
+      </div>
     </div>
-    <div class="col-md-4">
+    <script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+           x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}
+        x[myIndex-1].style.display = "block";
+        setTimeout(carousel, 9000);
+        console.log("hello world")
+    }
+    </script>
+
+    <div class="col-md-4 pull-right" >
         <h2>Anime Goers</h2>
         {% for user in users %}
             <a href="{% url 'accounts:view_profilepk' pk=user.pk %}">
@@ -42,3 +68,6 @@
     </div>
 </div>
 {% endblock %}
+
+
+</html>

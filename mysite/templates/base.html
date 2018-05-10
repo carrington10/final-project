@@ -1,41 +1,43 @@
+{% load static from staticfiles %}
 <html>
-<head>
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+          <head>
+                      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                      <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
+                      <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     {% block head %}
-<title>Base</title>
-     {% endblock %}
- </head>
-
-
-
-          <body>
-           <br />
+           </head>
+    <body>
           <nav class="navbar navbar-default">
-         <div class="container-fluid">
-           <div class="navbar-header">
-             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-             </button>
-             <a class="navbar-brand" href="#">VantaSpring</a>
-           </div>
+           <div class="container-fluid">
+             <div class="navbar-header">
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                       <span class="sr-only">Toggle navigation</span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                       <span class="icon-bar"></span>
+                     </button>
+             </div>
            <div id="navbar" class="navbar-collapse collapse">
 
           {% if user.is_authenticated %}
+           <a class="navbar-brand" href="{% url 'animeweb:home'%}">VantaSpring</a>
              <ul class="nav navbar-nav navbar-left">
                <li> <a href="{% url 'animeweb:home'%}">Home</a></li>
                <li> <a href="{% url 'accounts:view_profile' %}"> Profile </a></li>
                 <li> <a href="{% url 'accounts:edit_profile' %}"> Edit Account </a></li>
                 <li> <a href="{% url 'accounts:change_password' %}">Password Change</a></li>
+                <li> <a href="{% url 'message:messages_inbox' %}"> Inbox</a></li>
+                <li> <a href="{% url 'message:messages_compose' %}"> Compose</a></li>
              </ul>
              <ul class="nav navbar-nav navbar-right">
                <li><a href = "{% url 'logout' %}">Logout</a></li>
              </ul>
           {% else %}
+          <a class="navbar-brand" href="{% url 'login' %}">VantaSpring</a>
              <ul class="nav navbar-nav navbar-right">
                <li><a href = "{% url 'login' %}">Login</a></li>
 
