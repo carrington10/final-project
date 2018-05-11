@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static from staticfiles %}
+
+{% load bootstrap3 %}
+
+{% block body %}
+
+  <title> Video</title>
+  <h1> New Video</h1>
+     <form method="POST" class="post-form">
+       {% csrf_token %}
+       {% bootstrap_form form %}
+         <button type="submit" class="save btn btn-default">Add Spring!</button>
+     </form>
+{% endblock %}

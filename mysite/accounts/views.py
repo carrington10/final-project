@@ -103,8 +103,6 @@ def change_password(request):
             form = PasswordChangeForm(user= request.user)
             args = {'form': form}
             return render(request,'accounts/change_password.html',args)
-
-
 '''
 class based view that allows thr users to post on other users wall
 '''
@@ -121,4 +119,3 @@ class WallView(LoginRequiredMixin,CreateView):
                 wall_post.save()
                 return redirect('accounts:view_profilepk',pk = to_user.pk)
             return render(request, self.template_name, {'form': form})
-    

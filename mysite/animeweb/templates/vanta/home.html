@@ -65,22 +65,24 @@
       </li>
     </div>
     <div class="col-md-8">
-        <h1>VantaSpring</h1>
+        <h2>VantaSpring</h2>
 
         <h2>{{ text }}</h2>
-        <div class="w3-content w3-section" style="max-width:500px">
+        <div class="w3-content w3-section" style="max-width:600px">
               {% for post in posts %}
               <div class ="mySlides w3-animate-fading">
 
                 <img src="{{post.image.url}}" class="w3-hover-opacity" style="width:100%">
-                <div class="w3-display-center w3-container w3-padding-16 w3-black">
+                <div class="w3-display-center w3-container w3-padding-16 w3-pale-yellow">
                   <a href="{% url 'animeweb:post_view' pk=post.pk %}">{{ post.title }} </a>
                 </div>
               </div>
         {% endfor %}
 
       </div>
-
+      <a class="btn btn-dark" href="{% url 'animeweb:new_video'  %}">
+          <button type="button" class="btn btn-warning btn-lg">Add New Review</button>
+      </a>
       <br />
 
         {% for post in posts %}
@@ -96,7 +98,12 @@
 
             </div>
           </div>
-  </div>
+      </div>
+
+
+
+
+
        {% endfor %}
 
 

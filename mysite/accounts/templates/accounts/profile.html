@@ -13,7 +13,7 @@
 
           <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Profile</h3>
+                    <h3>Profile</h3>
                  </div>
                 <div class="panel-body">
                 {% if user.userprofile.image %}
@@ -38,15 +38,28 @@
             <div class="panel-body"> {{user.userprofile.bio}}</div>
             <br />
     </div>
-    <a class="btn btn-default" href="{% url 'accounts:add_wall' pk=user.pk %}">Post on wall</a>
+    <br />
+    <a class="btn btn-warning btn-lg" href="{% url 'accounts:add_wall' pk=user.pk %}">Post on wall</a>
 
-  <br />
+    <br />
+
+
     {% for wallp in wallps %}
-        <div class="Wallpost">
-            <div class="date">{{ wallp.created_date |date }}</div>
-              <strong>{{ wallp.user.first_name }} {{ wallp.user.last_Name }}</strong>
-            <p>{{ wallp.wall|linebreaks }}</p>
-        </div>
+<br />
+        <div class = "well">
+      <div class="media">
+        <a class="pull-left" href="{% url 'accounts:view_profilepk' pk=wallp.user.pk %}">
+        <img class="media-object" src="{% static 'images/default.jpg' %}">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"></h4>
+          <p class="text-left">By {{wallp.user}}</p>
+          <p> Created on  {{wallp.day_created}}   </p>
+              <p>{{wallp.wall}}</p>
+
+            </div>
+          </div>
+      </div>
     {% empty %}
         <p>No Wall Posts</p>
     {% endfor %}

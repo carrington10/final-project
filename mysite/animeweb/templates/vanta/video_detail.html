@@ -5,14 +5,40 @@
 {% block body %}
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
 
 
     <video  class ="img-responsive" controls>
     <source src='{{MEDIA_URL}}{{ post.video.url }}'>
     </video>
+
     <br />
+
+
+
+    <div class="star-rating" class= "centered" >
+			<input id="star-5"  onclick="postRating({{post.id}},5)"type="radio" name="rating" value="star-5">
+			<label for="star-5" title="5 stars">
+					<i class="active fa fa-star" aria-hidden="true"></i>
+			</label>
+			<input id="star-4" onclick="postRating({{post.id}},4)" type="radio" name="rating" value="star-4">
+			<label for="star-4" title="4 stars">
+					<i class="active fa fa-star" aria-hidden="true"></i>
+			</label>
+			<input id="star-3" onclick="postRating({{post.id}},3)" type="radio" name="rating" value="star-3">
+			<label for="star-3" title="3 stars">
+					<i class="active fa fa-star" aria-hidden="true"></i>
+			</label>
+			<input id="star-2" onclick="postRating({{post.id}},2)" type="radio" name="rating" value="star-2">
+			<label for="star-2" title="2 stars">
+					<i class="active fa fa-star" aria-hidden="true"></i>
+			</label>
+			<input id="star-1"  onclick="postRating({{post.id}},1)" type="radio" name="rating" value="star-1">
+			<label for="star-1" title="1 star">
+					<i class="active fa fa-star" aria-hidden="true"></i>
+			</label>
+		</div>
+
 
      <br />
 
@@ -36,7 +62,7 @@
                          </a>
                      </div>
                      <div class="media-body">
-                     <h4 class="media-heading">Created on   <time class="comment-date" datetime="16-12-2014 01:05">{{post.created}}</time> <br /> <p>
+                     <h4 class="media-heading">                Created on   <time class="comment-date" datetime="16-12-2014 01:05">{{post.created}}</time> <br /> <p>
 
                      </p>By:{{ post.user|linebreaksbr }} </p></h4>
                           {{post.description}}
@@ -49,22 +75,24 @@
     </br>
          <div class="row">
   <div class="col-md-8">
-    <h2 class="page-header">Comments</h2>
+    <h2>Comments</h2>
       <section class="comment-list">
 
      {% for comment in post.comments.all %}
 
         <!-- First Comment -->
-        <br />
         <article class="row">
           <div class="col-md-2 col-sm-2 hidden-xs">
             <figure class="thumbnail">
-              <img class="img-commentp" src="{% static 'images/default.jpg' %}" />
+              <img class="img-commentp"  src="{% static 'images/default.jpg' %}"  />
             </figure>
           </div>
           <div class="col-md-10 col-sm-10">
             <div class="panel panel-default arrow left">
-              <div class="panel-body">
+        <div class="panel-body">
+          <div class = "comment-class">
+
+
                 <header class="text-left">
                   <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{comment.created_date}}</time>
                 </header>
@@ -80,6 +108,7 @@
                 </div>
 
               </div>
+            </div>
             </div>
           </div>
         </article>

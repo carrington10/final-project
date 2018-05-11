@@ -46,7 +46,7 @@ class Wallpost(models.Model):
                             return self.wall
 
 '''
-Model for adding, and removing friends 
+Model for adding, and removing friends
 '''
 class Friend(models.Model):
     users = models.ManyToManyField(User)
@@ -66,3 +66,13 @@ class Friend(models.Model):
         current_user = current_user
         )
         friend.users.remove(new_friend)
+
+
+'''
+Model for rating a users videos
+'''
+class Rating(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    rating = models.ForeignKey(Post,on_delete = models.CASCADE)
+    count = models.IntegerField(default=0)
+    created = models.DateTimeField(auto_now_add=True)

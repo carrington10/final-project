@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import HomeForm, CommentForm
-from .models import Friend, Post, Comment
+from .models import Friend, Post, Comment, Rating
 
 # Create your views here.temp
 
@@ -75,6 +75,41 @@ class CommentView(LoginRequiredMixin,CreateView):
                             form = CommentForm()
                             return render(request, self.template_name, {'form': form})
 
+'''
+class based view to allow users to make video posts
+'''
+class NewVideoView(LoginRequiredMixin,CreateView):
+        template_name = 'vanta/add_video.html'
+        model = Post
+        form_class = HomeForm
+        def post(self,request,pk):
+            form =  HomeForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit = False)
+                post.user = request.user
+                post.save()
+                form = HomeForm()
+                return redirect('animeweb:home')
+            args = {'form':form}
+            return render(request, self.template_name, args)
+
+
+'''
+class based views for rating users videos
+'''
+
+class RatingView(LoginRequiredMixin,TemplateView):
+    def post(self,request):
+        videoid= request.POST.get("videoId")
+        counted = request.Post.get("count")
+        video= Post.object.get( id= videoid )
+        ratings,created=  Rating.objects.get_or_create(user= request.user,rating =video)
+        ratings.count= counted
+        ratings.save()
+        total_videos = Rating.objects.filter(rating = video).values_list("count",flat=True)
+        average = avg(total_videos)
+        resonse["average"]=int(average)
+        return HttpResponse(json.dump(response),status=201)
 
 '''
 function that lets the user add and remove friends
