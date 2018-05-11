@@ -60,8 +60,11 @@ def view_profile(request,pk=None):
 
         user = request.user
         wallp = Wallpost.objects.filter(to_user=request.user)
-        friend = Friend.objects.get(current_user=request.user)
-        friends = friend.users.all()
+        try:
+                    friend = Friend.objects.get(current_user=user)
+                    friends = friend.users.all()
+        except Friend.DoesNotExist:
+                            friends = None;
     args = {'user': user,'friends':friends, 'wallps':wallp}
     return render(request,'accounts/profile.html',args)
 
@@ -71,7 +74,7 @@ function to that allows users to edit and change thier profile information
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST,instance = request.user.userprofile)
+        form = EditProfileForm(request.POST,request.FILES,instance = request.user.userprofile)
         if form.is_valid():
                         form.save()
                         return redirect(reverse('accounts:view_profile'))

@@ -7,7 +7,7 @@
 {% block body %}
 
   <title> Profile</title>
-  <form method="POST">
+  <form method="POST"  enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form form %}
   <input type="submit" value="Submit" class="btn btn-default" />

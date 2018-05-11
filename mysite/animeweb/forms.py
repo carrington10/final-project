@@ -20,7 +20,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('text',)
 '''
-Form for adding and registering wall posts to the current users profile 
+Form for adding and registering wall posts to the current users profile
 '''
 class WallForm(forms.ModelForm):
 

@@ -8,7 +8,7 @@
 
   <title> Video</title>
   <h1> New Video</h1>
-     <form method="POST" class="post-form">
+     <form method="POST" class="post-form" enctype="multipart/form-data">
        {% csrf_token %}
        {% bootstrap_form form %}
          <button type="submit" class="save btn btn-default">Add Spring!</button>

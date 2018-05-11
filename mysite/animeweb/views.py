@@ -22,8 +22,12 @@ class HomeView(TemplateView):
                     form = HomeForm()
                     posts = Post.objects.all().order_by('-created')
                     users = User.objects.exclude(id=request.user.id)
-                    friend = Friend.objects.get(current_user=request.user)
-                    friends = friend.users.all()
+                    try:
+                            friend = Friend.objects.get(current_user=request.user)
+                            friends = friend.users.all()
+
+                    except Friend.DoesNotExist:
+                                    friends = None;
                     args = {
                             'form': form, 'posts': posts, 'users': users, 'friends': friends
                         }
@@ -82,13 +86,16 @@ class NewVideoView(LoginRequiredMixin,CreateView):
         template_name = 'vanta/add_video.html'
         model = Post
         form_class = HomeForm
-        def post(self,request,pk):
-            form =  HomeForm(request.POST)
+        def post(self,request):
+            form =  HomeForm(request.POST,request.FILES)
+            print("hello")
             if form.is_valid():
-                post = form.save(commit = False)
-                post.user = request.user
-                post.save()
-                form = HomeForm()
+                title = form.cleaned_data.get("title")
+                description = form.cleaned_data.get("description")
+                video = form.cleaned_data.get("video")
+                image = form.cleaned_data.get("image")
+                videop = Post(title=title,description=description,user=request.user,image=image,video=video)
+                videop.save()
                 return redirect('animeweb:home')
             args = {'form':form}
             return render(request, self.template_name, args)
