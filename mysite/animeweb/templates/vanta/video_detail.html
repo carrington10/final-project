@@ -7,22 +7,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
-  <h1>{{ post.title }}</h1>
-    <video width='400' controls>
+
+
+    <video  class ="img-responsive" controls>
     <source src='{{MEDIA_URL}}{{ post.video.url }}'>
     </video>
-        {{post.description}}
-     <p>{{ post.user.get_full_name|linebreaksbr }}</p>
+    <br />
 
-     <a class="btn btn-default" href="{% url 'animeweb:add_comment' pk=post.pk %}">Eskatiiiiiii!!!!!!</a>
-     {% for comment in post.comments.all %}
-         <div class="comment">
-             <div class="date">{{ comment.created_date }}</div>
-             <strong>{{ comment.author }}</strong>
-             <p>{{ comment.text|linebreaks }}</p>
+     <br />
+
+
+     <div class="panel panel-default">
+             <div class="panel-heading">
+                <h1>{{post.title}}</h1>
+                 <div class="btn-group" style="float:right;">
+                 	<ul class="dropdown-menu">
+                 		<li role="separator" class="divider"></li>
+                 		<li><a href="#"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Delete</a></li>
+                 	</ul>
+                 </div>
+                 <div class="clearfix"></div>
+             </div>
+             <div class="panel-body">
+                 <div class="media">
+                     <div class="media-left">
+                         <a href="#">
+                             <img class="media-object" src="{{post.image.url}}" >
+                         </a>
+                     </div>
+                     <div class="media-body">
+                     <h4 class="media-heading">Created on   <time class="comment-date" datetime="16-12-2014 01:05">{{post.created}}</time> <br /> <p>
+
+                     </p>By:{{ post.user|linebreaksbr }} </p></h4>
+                          {{post.description}}
+                     <div class="clearfix"></div>
+
+                    </div>
+                 </div>
+             </div>
          </div>
+    </br>
+         <div class="row">
+  <div class="col-md-8">
+    <h2 class="page-header">Comments</h2>
+      <section class="comment-list">
+
+     {% for comment in post.comments.all %}
+
+        <!-- First Comment -->
+        <br />
+        <article class="row">
+          <div class="col-md-2 col-sm-2 hidden-xs">
+            <figure class="thumbnail">
+              <img class="img-commentp" src="{% static 'images/default.jpg' %}" />
+            </figure>
+          </div>
+          <div class="col-md-10 col-sm-10">
+            <div class="panel panel-default arrow left">
+              <div class="panel-body">
+                <header class="text-left">
+                  <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> {{comment.created_date}}</time>
+                </header>
+                <div class="comment-post">
+
+                     <p>
+                        By: {{comment.creator}}
+                     </p>
+                     <br />
+                  <p>
+                  {{comment.text}}
+                </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </article>
+   <br />
+
+
+
+
      {% empty %}
          <p>No comments here yet :(</p>
      {% endfor %}
+
+   </br>
+
+   <a class="btn btn-dark" href="{% url 'animeweb:add_comment' pk=post.pk %}">
+       <button type="button" class="btn btn-warning btn-lg">Add Comment</button>
+   </a>
+
 
 {% endblock %}

@@ -8,13 +8,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import HomeForm, CommentForm
 from .models import Friend, Post, Comment
 
-# Create your views here.
+# Create your views here.temp
 
 
 '''
 class view that displays the homepage of the user
 The get function returns a link to the videos , and current friends of the users
-The post functons lets the user create a new video, and post it on the slideshow 
+The post functons lets the user create a new video, and post it on the slideshow
 '''
 class HomeView(TemplateView):
     template_name = 'vanta/home.html'
@@ -68,6 +68,7 @@ class CommentView(LoginRequiredMixin,CreateView):
                         if form.is_valid():
                             comment = form.save(commit=False)
                             comment.post = post
+                            comment.creator = request.user
                             comment.save()
                             return redirect('animeweb:post_view', pk=post.pk)
                  else:
