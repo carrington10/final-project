@@ -14,7 +14,7 @@ url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends, name='cha
 url(r'^video/(?P<pk>\d+)/$',PostView.as_view(), name = 'post_view'),
 url(r'^video/(?P<pk>\d+)/comment/$', CommentView.as_view(), name='add_comment'),
 url(r'^home/$',NewVideoView.as_view(), name = 'new_video'),
-url(r'^video/(?P<pk>\d+)/$',RatingView.as_view(), name = 'post_rating'),
+url(r'^video/(?P<pk>\d+)/rate/$',RatingView.as_view(), name = 'post_rating'),
 ##url(r'login/$',login,{'template_name':'vanta/login.html'})
 
 ]

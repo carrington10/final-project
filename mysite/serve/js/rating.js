@@ -1,15 +1,14 @@
 function postRating(videoId,count){
   $.ajax({
-    url: '{% url "animeweb:post_rating"  %}',
+    url: '/video/'+videoId+'/rate/',
     data: {
-      'username': {{ request.user.id}},
       'videoId':videoId,
       'count':count
     },
     dataType: 'json',
-    success: function (data) {
+    success: function (obj) {
 
-      var obj = JSON.parse(data)
+
       var average = Number(obj['average']);
       var starId = "star-"+average;
       $("#"+starId).prop('checked', true);

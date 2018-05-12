@@ -115,7 +115,7 @@ class RatingView(LoginRequiredMixin,TemplateView):
         ratings.save()
         total_videos = Rating.objects.filter(rating = video).values_list("count",flat=True)
         average = avg(total_videos)
-        resonse["average"]=int(average)
+        response["average"]=int(average)
         return HttpResponse(json.dump(response),status=201)
 
 '''
